@@ -1,3 +1,4 @@
+
 name: Test
 on:
   workflow_dispatch:
@@ -55,7 +56,7 @@ on:
         type: string
         description: "分支名(不可留空)/自定义版本标识(留空不修改)"
         required: false
-        default: "susfs-main/DestoryG"
+        default: "susfs-main/inkdye"
       BUILD_TIME:
         type: string
         description: "自定义构建时间 (输入F使用当前时间)"
@@ -85,7 +86,7 @@ on:
         type: boolean
         description: "是否添加更多ZRAM算法？"
         required: true
-        default: true
+        default: false
       LSM:
         type: boolean
         description: "是否启用关键分区写入保护模块(BBG)？"
@@ -849,40 +850,6 @@ jobs:
         with:
           name: ZRAM-Module_${{ env.KERNEL_VERSION }}_${{ steps.file_clean.outputs.value }}
           path: ZRAM-Module/*
-      - name: Get latest commit hash from SukiSU-Ultra repo
-        id: get_commit_hash
-        run: |
-          COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/main | jq -r .sha)
-          echo "LATEST_COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
-
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"
-          body: |
-            ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
-            ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
-            ${{ github.event.inputs.LSM == 'true' && 'LSM ✅️' || '' }}
-            ${{ github.event.inputs.FAST_BUILD == 'true' && 'FAST_BUILD ✅️' || '' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload AnyKernel3 to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ./AnyKernel3/*
-          tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"
-
-      - name: Upload ZRAM Module to Release
-        if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ZRAM-Module/*
-          tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"            
 
       - name: Post-build Disk Check
         run: df -h
