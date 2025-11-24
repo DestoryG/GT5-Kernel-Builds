@@ -47,7 +47,7 @@ on:
         type: choice
         description: "下载SUSFS模块调用方式"
         required: true
-        default: CI
+        default: NoN
         options:
           - CI
           - Release
@@ -878,7 +878,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create A AK3 zip for Release
         run: 
-          AK3ZIP_NAME="AnyKernel3_GT5_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}.zip"
+          AK3ZIP_NAME="AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}.zip"
           zip -r $AK3ZIP_NAME ./AnyKernel3/
           echo "AK3ZIP_NAME=${AK3ZIP_NAME}" >> $GITHUB_ENV
       - name: Create A ZRAM zip for Release
