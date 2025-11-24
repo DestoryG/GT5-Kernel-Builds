@@ -6,6 +6,6 @@
 
   - [Numbersf](https://github.com/Numbersf/Action-Build) 原脚本
   - [墨染_nlx](https://github.com/morannlx/Realme_And_Oneplus_Action-Build-SukisuUltra) 二改脚本提供Realme系列设备支持
-  - [SukiSU-Ultra团队](https://github.com/SukiSU-Ultra/SukiSU-Ultra)
-  - [VC茶屋] (https://github.com/vc-teahouse/Baseband-guard) BBG防格机仓库
+  - [SukiSU-Ultra](https://github.com/SukiSU-Ultra/SukiSU-Ultra)
+  - [VC茶屋](https://github.com/vc-teahouse/Baseband-guard) BBG防格机仓库
   - [ChatGPT](chatgpt.com)
