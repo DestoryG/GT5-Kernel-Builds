@@ -39,13 +39,4 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        workflow: build.yml  # 指定要触发的工作流文件
-        ref: ${{ github.ref }}  # 可选，如果需要指定分支
-        inputs:
-          key: value  # 可选，向目标工作流传递输入参数
-
-    - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@v2
-      with:
-        retain_days: 0
-        keep_minimum_runs: 2
+        workflow: build_test.yml  # 指定要触发的工作流文件
