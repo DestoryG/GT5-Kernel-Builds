@@ -876,11 +876,22 @@ jobs:
             ${{ github.event.inputs.FAST_BUILD == 'true' && 'FAST_BUILD ✅️' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Create A AK3 zip for Release
+        run: 
+          AK3ZIP_NAME="AnyKernel3_GT5_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}.zip"
+          zip -r $AK3ZIP_NAME ./AnyKernel3/
+          echo "AK3ZIP_NAME=${AK3ZIP_NAME}" >> $GITHUB_ENV
+      - name: Create A ZRAM zip for Release
+        if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
+        run:           
+          ZRAMZIP_NAME="ZRAM-Module_${{ env.KERNEL_VERSION }}_${{ steps.file_clean.outputs.value }}.zip"
+          zip -r $ZRAMIP_NAME ZRAM-Module/
+          echo "ZRAMZIP_NAME=${ZRAMZIP_NAME}" >> $GITHUB_ENV
+        
       - name: Upload AnyKernel3 to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./AnyKernel3/*
+          files: ./AnyKernel3/${{ env.AK3ZIP_NAME }}
           tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
 
@@ -888,7 +899,7 @@ jobs:
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
         uses: softprops/action-gh-release@v2
         with:
-          files: ZRAM-Module/*
+          files: ZRAM-Module/${{ env.ZRAMZIP_NAME }}
           tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
           
