@@ -125,7 +125,7 @@ jobs:
         env:
           FILE: ${{ github.event.inputs.FILE }}
         run: |
-          set -e
+          set -x
           cd "$GITHUB_WORKSPACE"
           if [[ "$FILE" =~ ^(.+)_([a-zA-Z])$ ]]; then
             FILE_CONF="${BASH_REMATCH[1]}"
