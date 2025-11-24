@@ -862,7 +862,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"
+          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
           body: |
             ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
             ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
@@ -876,7 +876,7 @@ jobs:
         with:
           files: ./AnyKernel3/*
           tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"
+          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
 
       - name: Upload ZRAM Module to Release
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
@@ -884,6 +884,6 @@ jobs:
         with:
           files: ZRAM-Module/*
           tag_name: ${{ github.ref }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH | slice(0, 7) }}"  
+          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
       - name: Post-build Disk Check
         run: df -h
