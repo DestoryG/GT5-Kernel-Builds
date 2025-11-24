@@ -1,5 +1,5 @@
 
-name: Test
+name: Kernel Build
 on:
   workflow_dispatch:
     inputs:
