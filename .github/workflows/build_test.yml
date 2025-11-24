@@ -857,11 +857,17 @@ jobs:
           COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/main | jq -r .sha)
           echo "LATEST_COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
 
+      - name: Generate tag
+        id: get_date_tag
+        run: |
+          TAG_NAME=$(date +'%Y%m%d')  # 获取今天的日期，格式为 YYYYMMDD
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ env.TAG_NAME }}  # 使用正确的 tag 名称
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
           body: |
             ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
@@ -875,7 +881,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ./AnyKernel3/*
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
 
       - name: Upload ZRAM Module to Release
@@ -883,7 +889,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ZRAM-Module/*
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
+          
       - name: Post-build Disk Check
         run: df -h
