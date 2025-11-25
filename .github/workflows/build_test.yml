@@ -855,12 +855,13 @@ jobs:
         id: get_commit_hash
         run: |
           COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/main | jq -r .sha)
-          echo "LATEST_COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
+          SHORT_COMMIT_HASH=$(echo $COMMIT_HASH | cut -c 1-7)  # 截取前 7 位
+          echo "LATEST_COMMIT_HASH=$SHORT_COMMIT_HASH" >> $GITHUB_ENV
 
       - name: Generate tag
         id: get_date_tag
         run: |
-          TAG_NAME=$(date +"%Y.%m.%d-%H%M")  # 获取今天的日期，格式为 YYYYMMDD
+          TAG_NAME=$(date +"%Y.%m.%d-%H%M")
           echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
 
       - name: Create Release
