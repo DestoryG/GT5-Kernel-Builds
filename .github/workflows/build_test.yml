@@ -802,7 +802,7 @@ jobs:
             clean_file="${file_base}"
           fi
           echo "value=$clean_file" >> "$GITHUB_OUTPUT"
-      - name: Upload AnyKernel3 To Artifact
+      - name: Upload AnyKernel3 to Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}
@@ -844,21 +844,21 @@ jobs:
             echo "upload=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-      - name: Upload ZRAM Module To Artifact
+      - name: Upload ZRAM Module to Artifact
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
         uses: actions/upload-artifact@v4
         with:
           name: ZRAM-Module_${{ env.KERNEL_VERSION }}_${{ steps.file_clean.outputs.value }}
           path: ZRAM-Module/*
 
-      - name: Get Latest Commit Hash From SukiSU-Ultra
+      - name: Get Latest Commit Hash from SukiSU-Ultra
         id: get_commit_hash
         run: |
           COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/susfs-main | jq -r .sha)
           SHORT_COMMIT_HASH=$(echo $COMMIT_HASH | cut -c 1-7)  # 截取前 7 位
           echo "LATEST_COMMIT_HASH=$SHORT_COMMIT_HASH" >> $GITHUB_ENV
 
-      - name: Generate tag
+      - name: Generate Tag
         id: get_date_tag
         run: |
           TAG_NAME=$(date +"%Y.%m.%d-%H%M")
@@ -884,27 +884,27 @@ jobs:
             ${{ github.event.inputs.ZRAM == 'true' && 'ZRAM ✅️' || ''  }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create AnyKernel3 Zip For Release
+      - name: Create AnyKernel3 zip For Release
         run: |
           AK3ZIP_NAME="AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}.zip"
           zip -r $AK3ZIP_NAME ./AnyKernel3/
           echo "AK3ZIP_NAME=$AK3ZIP_NAME" >> $GITHUB_ENV
 
-      - name: Create ZRAM Module Zip For Release
+      - name: Create ZRAM Module zip For Release
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
         run: |
           ZRAMZIP_NAME="ZRAM-Module_${{ env.KERNEL_VERSION }}_${{ steps.file_clean.outputs.value }}.zip"
           zip -r $ZRAMZIP_NAME ZRAM-Module/
           echo "ZRAMZIP_NAME=$ZRAMZIP_NAME" >> $GITHUB_ENV
 
-      - name: Upload AnyKernel3 To Release
+      - name: Upload AnyKernel3 to Release
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ env.AK3ZIP_NAME }}  # 直接引用变量
           tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
 
-      - name: Upload ZRAM Module To Release
+      - name: Upload ZRAM Module to Release
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
         uses: softprops/action-gh-release@v2
         with:
