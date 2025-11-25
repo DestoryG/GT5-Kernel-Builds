@@ -805,7 +805,7 @@ jobs:
       - name: Upload AnyKernel3
         uses: actions/upload-artifact@v4
         with:
-          name: AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}
+          name: AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}
           path: ./AnyKernel3/*
 
       - name: Download and Unzip ZRAM
@@ -886,7 +886,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create AK3 zip for Release
         run: |
-          AK3ZIP_NAME="AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}.zip"
+          AK3ZIP_NAME="AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}.zip"
           zip -r $AK3ZIP_NAME ./AnyKernel3/
           echo "AK3ZIP_NAME=$AK3ZIP_NAME" >> $GITHUB_ENV
 
