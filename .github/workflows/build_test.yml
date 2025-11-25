@@ -876,7 +876,7 @@ jobs:
             CPU Codename: ${{ env.CPUD }}
             Factory Pre-Installed Android Vesion: ${{ env.ANDROID_VERSION }}
             Kernel Version: ${{ env.KERNEL_VERSION }}
-            Build Method: ${{ env.BUILD_METHOD }
+            Build Method: ${{ env.BUILD_METHOD }}
             ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
             ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
             ${{ github.event.inputs.LSM == 'true' && 'BBG ✅️' || '' }}
