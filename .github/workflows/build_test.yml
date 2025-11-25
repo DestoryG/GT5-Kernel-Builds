@@ -903,7 +903,7 @@ jobs:
         with:
           files: ${{ env.ZRAMZIP_NAME }}  # 直接引用变量
           tag_name: ${{ env.TAG_NAME }}
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}
+          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
           
       - name: Post-build Disk Check
         run: df -h
