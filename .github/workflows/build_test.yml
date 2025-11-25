@@ -246,7 +246,7 @@ jobs:
           echo "Selected KPM: ${{ github.event.inputs.KPM }}"
           echo "Selected FAST_BUILD: ${{ github.event.inputs.FAST_BUILD }}"
           echo "Selected ZRAM: ${{ github.event.inputs.ZRAM }}"
-          echo "Selected LSM: ${{ github.event.inputs.LSM }}"
+          echo "Selected LSM_BBG: ${{ github.event.inputs.LSM }}"
       - name: Install Dependencies
         run: |
           sudo rm -f /var/lib/apt/lists/lock /var/lib/dpkg/lock
@@ -854,7 +854,7 @@ jobs:
       - name: Get latest commit hash from SukiSU-Ultra repo
         id: get_commit_hash
         run: |
-          COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/main | jq -r .sha)
+          COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/susfs-main | jq -r .sha)
           SHORT_COMMIT_HASH=$(echo $COMMIT_HASH | cut -c 1-7)  # 截取前 7 位
           echo "LATEST_COMMIT_HASH=$SHORT_COMMIT_HASH" >> $GITHUB_ENV
 
@@ -869,15 +869,21 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}  # 使用正确的 tag 名称
-          release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
+          release_name: "GT5 Kernel With SukiSU Ultra-SuSFS ${{ env.LATEST_COMMIT_HASH }}"
           body: |
+            Build For realme GT5(RMX3820/RMX3823)
+            CPU: ${{ env.CPU }}"
+            CPU Codename: ${{ env.CPUD }}"
+            Factory Pre-Installed Android Vesion: ${{ env.ANDROID_VERSION }}
+            Kernel Version: ${{ env.KERNEL_VERSION }}
+            Build Method: ${{ env.BUILD_METHOD }}"
             ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
             ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
             ${{ github.event.inputs.LSM == 'true' && 'BBG ✅️' || '' }}
             ${{ github.event.inputs.FAST_BUILD == 'true' && 'FAST_BUILD ✅️' || '' }}
+            ${{ github.event.inputs.ZRAM == 'true' && 'ZRAM ✅️' || ''  }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create AK3 zip for Release
         run: |
           AK3ZIP_NAME="AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.file_clean.outputs.value }}${{ steps.suffix.outputs.value }}.zip"
