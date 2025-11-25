@@ -873,7 +873,7 @@ jobs:
           body: |
             ${{ github.event.inputs.KPM == 'true' && 'KPM ✅️' || '' }}
             ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
-            ${{ github.event.inputs.LSM == 'true' && 'LSM ✅️' || '' }}
+            ${{ github.event.inputs.LSM == 'true' && 'BBG ✅️' || '' }}
             ${{ github.event.inputs.FAST_BUILD == 'true' && 'FAST_BUILD ✅️' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
