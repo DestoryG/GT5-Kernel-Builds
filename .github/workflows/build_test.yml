@@ -869,11 +869,11 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}  # 使用正确的 tag 名称
-          release_name: "GT5 Kernel With SukiSU Ultra-SuSFS ${{ env.LATEST_COMMIT_HASH }}"
+          name: "GT5 Kernel With SukiSU Ultra-SuSFS ${{ env.LATEST_COMMIT_HASH }}"
           body: |
             Build For realme GT5(RMX3820/RMX3823)
-            CPU: ${{ env.CPU }}"
-            CPU Codename: ${{ env.CPUD }}"
+            CPU: ${{ env.CPU }}
+            CPU Codename: ${{ env.CPUD }}
             Factory Pre-Installed Android Vesion: ${{ env.ANDROID_VERSION }}
             Kernel Version: ${{ env.KERNEL_VERSION }}
             Build Method: ${{ env.BUILD_METHOD }}"
@@ -881,7 +881,7 @@ jobs:
             ${{ github.event.inputs.VFS == 'true' && 'VFS ✅️' || '' }}
             ${{ github.event.inputs.LSM == 'true' && 'BBG ✅️' || '' }}
             ${{ github.event.inputs.FAST_BUILD == 'true' && 'FAST_BUILD ✅️' || '' }}
-            ${{ github.event.inputs.ZRAM == 'true' && 'ZRAM ✅️' || ''  }}"
+            ${{ github.event.inputs.ZRAM == 'true' && 'ZRAM ✅️' || ''  }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create AK3 zip for Release
