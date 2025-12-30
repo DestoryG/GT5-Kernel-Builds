@@ -920,7 +920,7 @@ jobs:
       - name: Mark commit as built
         if: success()
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACTION_MANAGE_TOKEN }}
         run: |
           gh api \
             --method PATCH \
