@@ -855,7 +855,7 @@ jobs:
       - name: Get Latest Commit Hash from SukiSU-Ultra
         id: get_commit_hash
         run: |
-          COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/susfs-main | jq -r .sha)
+          COMMIT_HASH=$(curl -s https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/commits/builtin | jq -r .sha)
           SHORT_COMMIT_HASH=$(echo $COMMIT_HASH | cut -c 1-7)  # 截取前 7 位
           echo "LATEST_COMMIT_HASH=$SHORT_COMMIT_HASH" >> $GITHUB_ENV
 
@@ -870,7 +870,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}  # 使用正确的 tag 名称
-          name: "GT5 Kernel With SukiSU Ultra-SuSFS ${{ env.LATEST_COMMIT_HASH }}"
+          name: "GT5 Kernel With SukiSU Ultra ${{ env.LATEST_COMMIT_HASH }}"
           body: |
             Build For realme GT5(RMX3820/RMX3823)
             CPU: ${{ env.CPU }}
@@ -913,7 +913,7 @@ jobs:
         if: ${{ github.event.inputs.ZRAM == 'true' && steps.zram_find.outputs.upload != 'false' }}
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZRAMZIP_NAME }}  # 直接引用变量
+          files: ${{ env.ZRAM_ZIP_NAME }}  # 直接引用变量
           tag_name: ${{ env.TAG_NAME }}
           release_name: "GT5 Kernel With SukiSU ${{ env.LATEST_COMMIT_HASH }}"
           
