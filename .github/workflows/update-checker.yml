@@ -2,7 +2,7 @@ name: Update Checker
 
 env:
   REPO_URL: https://github.com/SukiSU-Ultra/SukiSU-Ultra
-  REPO_BRANCH: main
+  REPO_BRANCH: builtin
 
 on:
   workflow_dispatch:
