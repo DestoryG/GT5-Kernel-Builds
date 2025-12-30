@@ -627,6 +627,10 @@ jobs:
             echo "CONFIG_CRYPTO_LZ4K_OPLUS=y" >> "$CONFIG_FILE"
             echo "CONFIG_ZRAM_WRITEBACK=y" >> "$CONFIG_FILE"
           fi
+          # BBG配置
+          if [ "${{ github.event.inputs.LSM }}" = "true" ]; then
+            echo "CONFIG_BBG=y" >> "$CONFIG_FILE"
+          fi
           # 移除构建审查
           sed -i 's/check_defconfig//' ./common/build.config.gki
       # Custom kernel build time, without adding #1 SMP PREEMPT 自定义内核构建时间，不要加入#1 SMP PREEMPT
