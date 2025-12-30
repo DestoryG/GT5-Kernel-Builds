@@ -40,7 +40,7 @@ jobs:
       - name: Save pending upstream commit
         if: steps.compare.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACTION_MANAGE_TOKEN }}
         run: |
           gh api \
             --method PATCH \
@@ -51,6 +51,6 @@ jobs:
       - name: Trigger build workflow
         if: steps.compare.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACTION_MANAGE_TOKEN }}
         run: |
           gh workflow run build_test.yml
