@@ -400,8 +400,6 @@ jobs:
           mv "$file.xml" ".repo/manifests_fallback/${file}.xml"
       - name: Add SukiSU Ultra
         run: |
-          set -Eeuo pipefail
-          set -x
           cd kernel_workspace/kernel_platform
           META="${{ github.event.inputs.KSU_META }}"
           BRANCH_NAME="${META%%/*}"
