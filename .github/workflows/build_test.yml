@@ -294,10 +294,10 @@ jobs:
           FILE="${{ github.event.inputs.FILE }}"
           if [[ "$FILE" == *"realme"* ]]; then
             echo "📦 Detected realme device, using realme branch"
-            repo init -u https://github.com/morannlx/kernel_manifest.git -b refs/heads/realme -m "${FILE}.xml" --depth=1
+            repo init -u https://github.com/DestoryG/kernel_manifest.git -b refs/heads/realme -m "${FILE}.xml" --depth=1
           else
             echo "📦 Using default oneplus branch for $FILE"
-            repo init -u https://github.com/morannlx/kernel_manifest.git -b refs/heads/oneplus/${{ env.CPU }} -m "${FILE}.xml" --depth=1
+            repo init -u https://github.com/DestoryG/kernel_manifest.git -b refs/heads/oneplus/${{ env.CPU }} -m "${FILE}.xml" --depth=1
           fi
           repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
           if [ -e kernel_platform/common/BUILD.bazel ]; then
