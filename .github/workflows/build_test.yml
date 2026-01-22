@@ -61,12 +61,12 @@ on:
         type: string
         description: "自定义构建时间 (输入F使用当前时间)"
         required: false
-        default: "Fri Nov 14 09:59:07 UTC 2025"
+        default: "Tue Aug 19 08:43:08 UTC 2025"
       SUFFIX:
         type: string
         description: "自定义内核后缀 (不输入使用随机字符串)"
         required: false
-        default: "8-o-01173-g24db146997d1" # 为了更好的隐蔽性跟随官方字符串
+        default: "8-o-01153-g6f24737ed732" # 为了更好的隐蔽性跟随官方字符串
       FAST_BUILD:
         type: boolean
         description: "是否启用极速构建？"
