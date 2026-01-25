@@ -1,3 +1,5 @@
+# 不再维护！
+因更新编译代码过于老旧，本仓库不再维护，现基于Numbersf最新脚本重构[新仓库](https://github.com/DestoryG/GT5-Action-Build)，同时包含了GT5 Realme UI 6.0和7.0两个系统的支持！
 # GT5-Kernel-Builds
 **```Build Realme GT5's SukiSU Ultra Kernel```** 
 
@@ -12,5 +14,4 @@
   - [SukiSU-Ultra](https://github.com/SukiSU-Ultra/SukiSU-Ultra)
   - [Numbersf](https://github.com/Numbersf/Action-Build) 原脚本
   - [墨染_nlx](https://github.com/morannlx/Realme_And_Oneplus_Action-Build-SukisuUltra) 二改脚本提供Realme系列设备支持
-  - [VC茶屋](https://github.com/vc-teahouse/Baseband-guard) BBG防格机仓库
   - [ChatGPT](https://chatgpt.com)
